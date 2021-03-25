@@ -1,19 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Employee 
+      v-for="(employee, index) in employees" 
+      :key="index" 
+      :name="employee.name"
+      :position="employee.position"
+      :phone="employee.phone"
+      :email="employee.email"
+      :children="employee.children"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Employee from "./components/Employee";
+import fetchData from './fakeData'
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Employee
+  },
+  data () {
+    return {
+      employees: []
+    }
+  },
+  mounted () {
+    this.employees = fetchData()
   }
-}
+};
 </script>
 
 <style>
@@ -24,5 +40,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  justify-content: center;
 }
 </style>
